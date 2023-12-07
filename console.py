@@ -38,7 +38,10 @@ class HBNBCommand(cmd.Cmd):
             "BaseModel",
             "User",
             "State",
-            "City"
+            "City",
+            "Place",
+            "Amenity",
+            "Review"
             }
 
     def emptyline(self):
