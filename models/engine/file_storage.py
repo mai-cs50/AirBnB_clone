@@ -13,8 +13,10 @@ from models.review import Review
 class FileStorage:
     '''storage engine'''
     __file_path = 'file.json'
-    __objicts = {}
-    class_dict = {"BaseModel": BaseModel, "User": User, "PLace": Place, "City": City, "State": State}
+    __objects = {}
+    class_dict = {"BaseModel": BaseModel, "User": User, "PLace": Place,
+                  "Amenity": Amenity, "City": City, "Review": Review,
+                  "State": State}
     
     def all(self):
         ''' '''
