@@ -50,7 +50,7 @@ class BaseModel:
     def to_dict(self):
         '''return dictionary'''
         dic = self.__dict__.copy()
-        dict["created_at"] = self.created_at.isoformat()
-        dict["updated_at"] = self.updated_at.isoformat()
-        dict["__class__"] = self.__class__.__name__
-        return dict
+        dic["created_at"] = self.created_at.isoformat()
+        dic["updated_at"] = self.updated_at.isoformat()
+        dic["__class__"] = self.__class__.__name__
+        return dic
