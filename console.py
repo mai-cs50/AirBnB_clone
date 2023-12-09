@@ -165,7 +165,7 @@ class HBNBCommand(cmd.Cmd):
         for obj in storage.all().values():
             if argl[0] == obj.__class__.__name__:
                 count += 1
-         print (count)
+        print(count)
 
     def do_update(self, arg):
         ''' '''
