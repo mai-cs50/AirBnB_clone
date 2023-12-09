@@ -163,12 +163,13 @@ class HBNBCommand(cmd.Cmd):
         for obj in storage.all().values():
             if argl[0] == obj.__class__.__name__:
                 count += 1
-            print(count)
+         print(count)
 
     def do_update(self, arg):
         ''' '''
         argl = parse(arg)
         objdict = storage.all()
+    
         if len(argl) == 0:
             print("** class name missing **")
             return False
@@ -178,7 +179,7 @@ class HBNBCommand(cmd.Cmd):
         if len(argl) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(argl[0], argl[1] not in objdict.keys():
+        if "{}.{}".format(argl[0], argl[1]) not in objdict.keys():
             print("** no instance found **")
             return False
         if len(argl) == 2:
@@ -188,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
             try:
                 type(eval(argl[2])) != dict
             except NameError:
-                print("value missing")
+                print("** value missing **")
                 return False
 
         if len(argl) == 4:
