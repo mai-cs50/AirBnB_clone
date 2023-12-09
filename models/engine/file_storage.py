@@ -17,7 +17,7 @@ class FileStorage:
     class_dict = {"BaseModel": BaseModel, "User": User, "PLace": Place,
                   "Amenity": Amenity, "City": City, "Review": Review,
                   "State": State}
-    
+
     def all(self):
         ''' '''
         return self.__objects
