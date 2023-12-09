@@ -171,7 +171,7 @@ class HBNBCommand(cmd.Cmd):
         ''' '''
         argl = parse(arg)
         objdict = storage.all()
-    
+
         if len(argl) == 0:
             print("** class name missing **")
             return False
