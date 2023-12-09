@@ -11,5 +11,6 @@ from console import HBNBCommand
 from unittest.mock import patch
 from models.engine.file_storage import FileStorage
 
+
 class TestHBNBCommand_prompting(unittest.TestCase):
     ''' '''
