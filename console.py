@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
             "Place",
             "Amenity",
             "Review"
-            }
+        }
 
     def emptyline(self):
         ''' '''
@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
                 "destroy": self.do_destroy,
                 "count": self.do_count,
                 "update": self.do_update
-                }
+            }
         match = re.search(r"\.", arg)
         if match is not None:
             argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
@@ -78,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
         print("")
         return True
 
-    def do_creat(self, line):
+    def do_create(self, line):
         ''' '''
         try:
             if not line:
@@ -88,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
             kwargs = {}
             for i in range(1, len(my_list)):
                 key, value = tuple(my_list[i].split("="))
-                if value[0] = '"':
+                if value[0] == '"':
                     value = value.strip('"').replace("_", " ")
                 else:
                     try:
@@ -111,20 +111,20 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
-        def do_show(self, arg):
-            ''' '''
-            argl = parse(arg)
-            objdict = storage.all()
-            if len(argl) == 0:
-                print("** class name missing **")
-            elif argl[0] not in HBNBcommand.classes:
-                print("** class doesn't exist **")
-            elif len(argl) == 1:
-                print("** instance id missing **")
-            elif "{}.{}".format(argl[0], argl[1]) not in object:
-                print("** no instance found **")
-            else:
-                print(objdict["{}.{}".format(argl[0], argl[1])])
+    def do_show(self, arg):
+        ''' '''
+        argl = parse(arg)
+        objdict = storage.all()
+        if len(argl) == 0:
+            print("** class name missing **")
+        elif argl[0] not in HBNBcommand.classes:
+            print("** class doesn't exist **")
+        elif len(argl) == 1:
+            print("** instance id missing **")
+        elif "{}.{}".format(argl[0], argl[1]) not in object:
+            print("** no instance found **")
+        else:
+            print(objdict["{}.{}".format(argl[0], argl[1])])
 
         def do_destroy(self, arg):
             ''' '''
