@@ -120,3 +120,157 @@ class TestHMNMCommand_help(unitest.TestCase):
 
 class TestHMNMCommand_exit(unitest.TestCase):
     ''' '''
+    def test_quit_exits(self):
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertTrue(HBNBCommand().onecmd("quit"))
+
+    def test_EOF_exits(self):
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertTrue(HBNBCommand().onecmd("EOF"))
+
+
+class TestHMNMCommand_create(unitest.TestCase):
+    ''' '''
+    
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage.__objects = {}
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os,remove("file.json")
+        except IOError::
+            pass
+        try:
+            os,rename("tmp", "file.json")
+        except IOError::
+            pass
+
+    def test_create_missing_class(self):
+        correct = "** class name missing **"
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create"))
+            self.assertEqual("", output.getvalue().strip())
+
+    def test_create_invalid_class(self):
+        correct = "** class doesn't exist **"
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create MyMOdel"))
+            self.assertEqual("", output.getvalue().strip())
+
+    def test_create_invalid_syntax(self):
+        correct = "Unknown syntax: MyModel.create()"
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("MyModel.create()"))
+            self.assertEqual("", output.getvalue().strip())
+        correct = "Unknown syntax: BaseModel.create()"
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.create()"))
+            self.assertEqual("", output.getvalue().strip())
+
+    def test_create_object(self):
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
+            self.assertEqual("", output.getvalue().strip())
+            tastkey = "BaseModel.{}".format(output.getvalue().strip())
+            self.assertIN(testkey, storage.all().keys())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create User"))
+            self.assertEqual("", output.getvalue().strip())
+            tastkey = "User.{}".format(output.getvalue().strip())
+            self.assertIN(testkey, storage.all().keys())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create State"))
+            self.assertEqual("", output.getvalue().strip())
+            tastkey = "State.{}".format(output.getvalue().strip())
+            self.assertIN(testkey, storage.all().keys())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create City"))
+            self.assertEqual("", output.getvalue().strip())
+            tastkey = "City.{}".format(output.getvalue().strip())
+            self.assertIN(testkey, storage.all().keys())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Amenity"))
+            self.assertEqual("", output.getvalue().strip())
+            tastkey = "Amenity.{}".format(output.getvalue().strip())
+            self.assertIN(testkey, storage.all().keys())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Place"))
+            self.assertEqual("", output.getvalue().strip())
+            tastkey = "place.{}".format(output.getvalue().strip())
+            self.assertIN(testkey, storage.all().keys())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Review"))
+            self.assertEqual("", output.getvalue().strip())
+            tastkey = "Review.{}".format(output.getvalue().strip())
+            self.assertIN(testkey, storage.all().keys())
+
+
+class TestHMNMCommand_show(unitest.TestCase):
+    ''' '''
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage.__objects = {}
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os,remove("file.json")
+        except IOError::
+            pass
+        try:
+            os,rename("tmp", "file.json")
+        except IOError::
+            pass
+
+    def test_show_missing_class(self):
+        correct = "** class name missing **"
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show()"))
+            self.assertNotEqual(correct, output.getvalue().strip())
+
+    def test_show_invalid_class(self):
+        correct = "** class name missing **"
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show MyModel"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("MyModel.show()"))
+            self.assertNotEqual(correct, output.getvalue().strip())
+
+    def test_show_missing_id_dot_notation(self):
+        correct = "** instance id missing **"
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.show()"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("User.show()"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("State.show()"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("City.show()"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Amenity.show()"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Place.show()"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Review.show()"))
+            self.assertEqual(correct, output.getvalue().strip())
