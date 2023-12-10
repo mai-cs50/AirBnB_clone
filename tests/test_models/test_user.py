@@ -92,15 +92,15 @@ class TestUser_save(unitest.TestCase):
             os.rename("file.json", "tmp")
         except IOError:
             pass
-    
+
     def tearDown(self):
         try:
-            os,remove("file.json")
-        except IOError::
+            os, remove("file.json")
+        except IOError:
             pass
         try:
-            os,rename("tmp", "file.json")
-        except IOError::
+            os, rename("tmp", "file.json")
+        except IOError:
             pass
 
     def test_one_save(self):
