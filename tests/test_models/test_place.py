@@ -95,19 +95,19 @@ class TestPlace_instantiation(unittest.TestCase):
     def test_two_places_unique_ids(self):
         place1 = Place()
         place2 = Place()
-        self.assertNotEqual(place2.id, place2.id)
+        self.assertNotEqual(place1.id, place2.id)
 
     def test_two_places_different_created_at(self):
         place1 = Place()
         sleep(0.05)
         place2 = Place()
-        self.assertLess(place2.created_at, place2.created_at)
+        self.assertLess(place1.created_at, place2.created_at)
 
     def test_two_places_different_updated_at(self):
         place1 = Place()
         sleep(0.05)
         place2 = Place()
-        self.assertLess(place2.updated_at, place2.updated_at)
+        self.assertLess(place1.updated_at, place2.updated_at)
 
     def test_str_representation(self):
         date = datetime.today()
@@ -128,8 +128,8 @@ class TestPlace_instantiation(unittest.TestCase):
     def test_instantiation_with_kwargs(self):
         date = datetime.today()
         date_iso = data.isoformat()
-        place = Place(id="346", created_at=date_iso, updated_at=date_iso)
-        self.assertEqual(place.id, "346")
+        place = Place(id="345", created_at=date_iso, updated_at=date_iso)
+        self.assertEqual(place.id, "345")
         self.assertEqual(place.created_at, date)
         self.assertEqual(place.updated_at, date)
 

@@ -28,36 +28,36 @@ class TestState_instantiation(unittest.TestCase):
 
     def test_name_is_public_attribute(self):
         state = State()
-        self.assertEqual(str, type(State.email))
-        self.assertIn("name", dir(st))
-        self.assertNotIn("name", st.__dict__)
+        self.assertEqual(str, type(State.name))
+        self.assertIn("name", dir(state))
+        self.assertNotIn("name", state.__dict__)
 
     def test_two_states_unique_ids(self):
         state1 = State()
         state2 = State()
-        self.assertNotEqual(state2.id, state2.id)
+        self.assertNotEqual(state1.id, state2.id)
 
     def test_two_states_different_created_at(self):
         state1 = State()
         sleep(0.05)
         state2 = State()
-        self.assertLess(state2.created_at, state2.created_at)
+        self.assertLess(state1.created_at, state2.created_at)
 
     def test_two_states_different_updated_at(self):
         state1 = State()
         sleep(0.05)
         state2 = State()
-        self.assertLess(state2.updated_at, state2.updated_at)
+        self.assertLess(state1.updated_at, state2.updated_at)
 
     def test_str_representation(self):
         date = datetime.today()
         date.repr = repr(date)
         state = State()
-        state.id = "123457"
+        state.id = "123456"
         state.created_at = state.created_at = date
         statestr = state.__str__()
-        self.assertIn("[State] (123457)", statestr)
-        self.assertIn("'id': '123457'", statestr)
+        self.assertIn("[State] (123456)", statestr)
+        self.assertIn("'id': '123456'", statestr)
         self.assertIn("'created_at': " + date.repr, statestr)
         self.assertIn("'updated_at': " + date.repr, statestr)
 
@@ -68,8 +68,8 @@ class TestState_instantiation(unittest.TestCase):
     def test_instantiation_with_kwargs(self):
         date = datetime.today()
         date_iso = data.isoformat()
-        state = State(id="346", created_at=date_iso, updated_at=date_iso)
-        self.assertEqual(state.id, "346")
+        state = State(id="345", created_at=date_iso, updated_at=date_iso)
+        self.assertEqual(state.id, "345")
         self.assertEqual(state.created_at, date)
         self.assertEqual(state.updated_at, date)
 
@@ -157,7 +157,7 @@ class TestState_to_dict(unittest.TestCase):
     def test_to_dict_output(self):
         date = datetime.today()
         state = State()
-        state.id = "123457"
+        state.id = "123456"
         state.crested_at = state.updated_at = date
         tdict = {
                 'id': '123456'

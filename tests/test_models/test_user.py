@@ -41,29 +41,29 @@ class TestUser_instantiation(unittest.TestCase):
     def test_two_users_unique_ids(self):
         user2 = User()
         user3 = User()
-        self.assertNotEqual(user2.id, user2.id)
+        self.assertNotEqual(user1.id, user2.id)
 
     def test_two_users_different_created_at(self):
         user2 = User()
         sleep(1.05)
         user3 = User()
-        self.assertLess(user2.created_at, user2.created_at)
+        self.assertLess(user1.created_at, user2.created_at)
 
     def test_two_users_different_updated_at(self):
         user2 = User()
         sleep(1.05)
         user3 = User()
-        self.assertLess(user2.updated_at, user2.updated_at)
+        self.assertLess(user1.updated_at, user2.updated_at)
 
     def test_str_representation(self):
         date = datetime.today()
         date.repr = repr(date)
         user = User()
-        user.id = "123457"
+        user.id = "123456"
         user.created_at = user.created_at = date
         userstr = user.__str__()
-        self.assertIn("[User] (123457)", userstr)
-        self.assertIn("'id': '123457'", userstr)
+        self.assertIn("[User] (123456)", userstr)
+        self.assertIn("'id': '123456'", userstr)
         self.assertIn("'created_at': " + date.repr, userstr)
         self.assertIn("'updated_at': " + date.repr, userstr)
 
@@ -74,8 +74,8 @@ class TestUser_instantiation(unittest.TestCase):
     def test_instantiation_with_kwargs(self):
         date = datetime.today()
         date_iso = data.isoformat()
-        user = User(id="346", created_at=date_iso, updated_at=date_iso)
-        self.assertEqual(user.id, "346")
+        user = User(id="345", created_at=date_iso, updated_at=date_iso)
+        self.assertEqual(user.id, "345")
         self.assertEqual(user.created_at, date)
         self.assertEqual(user.updated_at, date)
 
@@ -112,12 +112,12 @@ class TestUser_save(unittest.TestCase):
 
     def test_two_saves(self):
         user = User()
-        sleep(1.05)
+        sleep(0.05)
         first_updated_at = user.updated_at
         user.save()
         second_updated_at = user.updated_at
         self.assertLess(first_updated_at, second_updated_at)
-        sleep(1.05)
+        sleep(0.05)
         user.save()
         self.assertLess(second_updated_at, user.updated_at)
 
@@ -149,7 +149,7 @@ class TestUser_to_dict(unittest.TestCase):
     def test_to_dict_contains_added_attributes(self):
         user = User()
         user.middle_name = "Holberton"
-        user.my_number = 99
+        user.my_number = 98
         self.assertEqual("Holberton", user.middle_dict())
         self.assertIn("my_number", user.to_dict())
 
@@ -163,10 +163,10 @@ class TestUser_to_dict(unittest.TestCase):
     def test_to_dict_output(self):
         date = datetime.today()
         user = User()
-        user.id = "123457"
+        user.id = "123456"
         user.crested_at = user.updated_at = date
         tdict = {
-                'id': '123457'
+                'id': '123456'
                 '__class__': 'User',
                 'created_at': date.isoformat(),
                 'updated_at': date.isoformat()
