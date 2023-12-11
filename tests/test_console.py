@@ -55,12 +55,12 @@ class TestHBNBCommand_prompting(unittest.TestCase):
         self.assertEqual("(hbnb) ", HBNBCommand).prompt)
 
     def test_empty_line(self):
-        with patch("sys.stdout", new=stringIO()) as output:
+        with patch ("sys.stdout", new=stringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd(""))
             self.assertEqual("", output.getvalue().strip())
 
 
-class TestHMNMCommand_help(unitest.TestCase):
+class TestHBNBCommand_help(unittest.TestCase):
     ''' '''
 
     def test_help_quit(self):
@@ -118,7 +118,7 @@ class TestHMNMCommand_help(unitest.TestCase):
             self.assertEqual("", output.getvalue().strip())
 
 
-class TestHMNMCommand_exit(unitest.TestCase):
+class TestHMNMCommand_exit(unittest.TestCase):
     ''' '''
     def test_quit_exits(self):
         with patch("sys.stdout", new=stringIO()) as output:
@@ -129,7 +129,7 @@ class TestHMNMCommand_exit(unitest.TestCase):
             self.assertTrue(HBNBCommand().onecmd("EOF"))
 
 
-class TestHMNMCommand_create(unitest.TestCase):
+class TestHMNMCommand_create(unittest.TestCase):
     ''' '''
     
     @classmethod
@@ -211,7 +211,7 @@ class TestHMNMCommand_create(unitest.TestCase):
             self.assertIN(testkey, storage.all().keys())
 
 
-class TestHMNMCommand_show(unitest.TestCase):
+class TestHMNMCommand_show(unittest.TestCase):
     ''' '''
 
     @classmethod
@@ -274,3 +274,27 @@ class TestHMNMCommand_show(unitest.TestCase):
         with patch("sys.stdout", new=stringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("Review.show()"))
             self.assertEqual(correct, output.getvalue().strip())
+
+    def test_show_no_instance_found_space_notation(self):
+        correct = "no instance found"
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show BaseModel 1"))
+            self.assertEqual(correct, output.getvalue().strip())
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show User 1"))
+            self.assertEqual(correct, output.getvalue().strip()
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show State 1"))
+            self.assertEqual(correct, output.getvalue().strip()
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show City 1"))
+            self.assertEqual(correct, output.getvalue().strip()
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show Amenity 1"))
+            self.assertEqual(correct, output.getvalue().strip()
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show Place 1"))
+            self.assertEqual(correct, output.getvalue().strip()
+        with patch("sys.stdout", new=stringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("show Review 1"))
+            self.assertEqual(correct, output.getvalue().strip()
