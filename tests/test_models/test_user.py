@@ -131,7 +131,7 @@ class TestUser_save(unittest.TestCase):
         user.save()
         userid = "User." + user.id
         with open("file.json", "r") as f:
-            self.assertLess(userid, f.read())
+            self.assertIn(userid, f.read())
 
 
 class TestUser_to_dict(unittest.TestCase):
@@ -142,7 +142,7 @@ class TestUser_to_dict(unittest.TestCase):
     def test_to_dict_contains_correct_keys(self):
         user = User()
         self.assertIn("id", user.to_dict())
-        self.assertIn("crested_at", user.to_dict())
+        self.assertIn("created_at", user.to_dict())
         self.assertIn("updated_at", user.to_dict())
         self.assertIn("__class__", user.to_dict())
 
