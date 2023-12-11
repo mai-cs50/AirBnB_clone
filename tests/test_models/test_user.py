@@ -95,11 +95,11 @@ class TestUser_save(unittest.TestCase):
 
     def tearDown(self):
         try:
-            os, remove("file.json")
+            os.remove("file.json")
         except IOError:
             pass
         try:
-            os, rename("tmp", "file.json")
+            os.rename("tmp", "file.json")
         except IOError:
             pass
 
@@ -121,12 +121,12 @@ class TestUser_save(unittest.TestCase):
         user.save()
         self.assertLess(second_updated_at, user.updated_at)
 
-    def save_with_arg(self):
+    def test_save_with_arg(self):
         user = User()
         with self.assertRaises(TypeError):
             user.save(None)
 
-    def save_with_updates_file(self):
+    def test_save_with_updates_file(self):
         user = User()
         user.save()
         userid = "User." + user.id
