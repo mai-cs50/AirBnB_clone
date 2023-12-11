@@ -52,7 +52,7 @@ class TestHBNBCommand_prompting(unittest.TestCase):
         self.assertTrue(len(self.__doc__) >= 1)
 
     def test_prompt_string(self):
-        self.assertEqual("(hbnb) ", HBNBCommand).prompt)
+        self.assertEqual("(hbnb) ", HBNBCommand.prompt)
 
     def test_empty_line(self):
         with patch("sys.stdout", new=StringIO()) as output:
@@ -67,55 +67,55 @@ class TestHBNBCommand_help(unittest.TestCase):
         h = "Quit Command"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help quit"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
     def test_help_create(self):
-        h = "create instant"
+        h = ("create instant")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help create"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
     def test_help_EOF(self):
         h = "EOF signal to exit the program"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help EOF"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
     def test_help_show(self):
-        h = "print string repr"
+        h = ("print string repr")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help show"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
     def test_help_destroy(self):
-        h = "delet a class instant"
+        h = ("delet a class instant")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help destroy"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
     def test_help_all(self):
-        h = "print all string"
+        h = ("print all string")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
-    def teat_help_count(self):
-        h = "display count instant"
+    def test_help_count(self):
+        h = ("display count instant")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help cout"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
     def test_help_update(self):
-        h = "update instant"
+        h = ("update instant")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
     def test_help(self):
-        h = "documented command"
+        h = ("documented command")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
 
 class TestHMNMCommand_exit(unittest.TestCase):
@@ -144,34 +144,34 @@ class TestHMNMCommand_create(unittest.TestCase):
     def tearDown(self):
         try:
             os,remove("file.json")
-        except IOError::
+        except IOError:
             pass
         try:
             os,rename("tmp", "file.json")
-        except IOError::
+        except IOError:
             pass
 
     def test_create_missing_class(self):
-        correct="** class name missing **"
+        correct = "** class name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(correct, output.getvalue().strip())
 
     def test_create_invalid_class(self):
-        correct="** class doesn't exist **"
+        correct = "** class doesn't exist **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create MyMOdel"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(correct, output.getvalue().strip())
 
     def test_create_invalid_syntax(self):
         correct="Unknown syntax: MyModel.create()"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("MyModel.create()"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(correct, output.getvalue().strip())
         correct="Unknown syntax: BaseModel.create()"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("BaseModel.create()"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertEqual(correct, output.getvalue().strip())
 
     def test_create_object(self):
         with patch("sys.stdout", new=StringIO()) as output:
