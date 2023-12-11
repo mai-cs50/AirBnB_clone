@@ -10,7 +10,7 @@ from models import storage
 from console import HBNBCommand
 from unittest.mock import patch
 from models.engine.file_storage import FileStorage
-
+from io import StrinIO
 
 class TestHBNBCommand_prompting(unittest.TestCase):
     ''' '''
