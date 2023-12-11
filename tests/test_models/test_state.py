@@ -33,20 +33,20 @@ class TestState_instantiation(unittest.TestCase):
         self.assertNotIn("name", st.__dict__)
 
     def test_two_states_unique_ids(self):
+        state1 = State()
         state2 = State()
-        state3 = State()
         self.assertNotEqual(state2.id, state2.id)
 
     def test_two_states_different_created_at(self):
-        state2 = State()
+        state1 = State()
         sleep(0.05)
-        state3 = State()
+        state2 = State()
         self.assertLess(state2.created_at, state2.created_at)
 
     def test_two_states_different_updated_at(self):
-        state2 = State()
+        state1 = State()
         sleep(0.05)
-        state3 = State()
+        state2 = State()
         self.assertLess(state2.updated_at, state2.updated_at)
 
     def test_str_representation(self):
