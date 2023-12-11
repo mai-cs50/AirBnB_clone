@@ -126,7 +126,7 @@ class TestUser_save(unittest.TestCase):
         with self.assertRaises(TypeError):
             user.save(None)
 
-    def test_save_with_updates_file(self):
+    def test_save_updates_file(self):
         user = User()
         user.save()
         userid = "User." + user.id
