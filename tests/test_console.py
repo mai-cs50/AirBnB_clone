@@ -164,11 +164,11 @@ class TestHMNMCommand_create(unittest.TestCase):
             self.assertEqual(correct, output.getvalue().strip())
 
     def test_create_invalid_syntax(self):
-        correct="Unknown syntax: MyModel.create()"
+        correct = "*** Unknown syntax: MyModel.create()"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("MyModel.create()"))
             self.assertEqual(correct, output.getvalue().strip())
-        correct="Unknown syntax: BaseModel.create()"
+        correct = "*** Unknown syntax: BaseModel.create()"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("BaseModel.create()"))
             self.assertEqual(correct, output.getvalue().strip())
@@ -176,37 +176,37 @@ class TestHMNMCommand_create(unittest.TestCase):
     def test_create_object(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertLess(0, output.getvalue().strip())
             tastkey = "BaseModel.{}".format(output.getvalue().strip())
             self.assertIN(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create User"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertLess(0, output.getvalue().strip())
             tastkey = "User.{}".format(output.getvalue().strip())
             self.assertIN(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create State"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertLess(0, output.getvalue().strip())
             tastkey = "State.{}".format(output.getvalue().strip())
             self.assertIN(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create City"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertLess(0, output.getvalue().strip())
             tastkey = "City.{}".format(output.getvalue().strip())
             self.assertIN(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create Amenity"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertLess(0, output.getvalue().strip())
             tastkey = "Amenity.{}".format(output.getvalue().strip())
             self.assertIN(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create Place"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertLess(0, output.getvalue().strip())
             tastkey = "place.{}".format(output.getvalue().strip())
             self.assertIN(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create Review"))
-            self.assertEqual("", output.getvalue().strip())
+            self.assertLess(0, output.getvalue().strip())
             tastkey = "Review.{}".format(output.getvalue().strip())
             self.assertIN(testkey, storage.all().keys())
 
