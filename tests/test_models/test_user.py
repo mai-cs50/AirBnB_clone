@@ -130,7 +130,7 @@ class TestUser_save(unittest.TestCase):
         user = User()
         user.save()
         userid = "User." + user.id
-        open with("file.json", "r") as f:
+        with open("file.json", "r") as f:
             self.assertLess(userid, f.read())
 
 
