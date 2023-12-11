@@ -178,37 +178,37 @@ class TestHBNBCommand_create(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
             self.assertLess(0, len(output.getvalue().strip()))
             tastkey = "BaseModel.{}".format(output.getvalue().strip())
-            self.assertIN(testkey, storage.all().keys())
+            self.assertIn(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create User"))
             self.assertLess(0, len(output.getvalue().strip()))
             tastkey = "User.{}".format(output.getvalue().strip())
-            self.assertIN(testkey, storage.all().keys())
+            self.assertIn(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create State"))
             self.assertLess(0, len(output.getvalue().strip()))
             tastkey = "State.{}".format(output.getvalue().strip())
-            self.assertIN(testkey, storage.all().keys())
+            self.assertIn(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create City"))
             self.assertLess(0, len(output.getvalue().strip()))
             tastkey = "City.{}".format(output.getvalue().strip())
-            self.assertIN(testkey, storage.all().keys())
+            self.assertIn(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create Amenity"))
             self.assertLess(0, len(output.getvalue().strip()))
             tastkey = "Amenity.{}".format(output.getvalue().strip())
-            self.assertIN(testkey, storage.all().keys())
+            self.assertIn(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create Place"))
             self.assertLess(0, len(output.getvalue().strip()))
             tastkey = "place.{}".format(output.getvalue().strip())
-            self.assertIN(testkey, storage.all().keys())
+            self.assertIn(testkey, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create Review"))
             self.assertLess(0, len(output.getvalue().strip()))
             tastkey = "Review.{}".format(output.getvalue().strip())
-            self.assertIN(testkey, storage.all().keys())
+            self.assertIn(testkey, storage.all().keys())
 
 
 class TestHBNBCommand_show(unittest.TestCase):
@@ -226,15 +226,15 @@ class TestHBNBCommand_show(unittest.TestCase):
     def tearDown(self):
         try:
             os,remove("file.json")
-        except IOError::
+        except IOError:
             pass
         try:
             os,rename("tmp", "file.json")
-        except IOError::
+        except IOError:
             pass
 
     def test_show_missing_class(self):
-        correct="** class name missing **"
+        correct = "** class name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show"))
             self.assertEqual(correct, output.getvalue().strip())
@@ -243,7 +243,7 @@ class TestHBNBCommand_show(unittest.TestCase):
             self.assertNotEqual(correct, output.getvalue().strip())
 
     def test_show_invalid_class(self):
-        correct="** class name missing **"
+        correct = "** class name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show MyModel"))
             self.assertEqual(correct, output.getvalue().strip())
@@ -252,7 +252,7 @@ class TestHBNBCommand_show(unittest.TestCase):
             self.assertNotEqual(correct, output.getvalue().strip())
 
     def test_show_missing_id_dot_notation(self):
-        correct="** instance id missing **"
+        correct = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("BaseModel.show()"))
             self.assertEqual(correct, output.getvalue().strip())
@@ -276,7 +276,7 @@ class TestHBNBCommand_show(unittest.TestCase):
             self.assertEqual(correct, output.getvalue().strip())
 
     def test_show_no_instance_found_space_notation(self):
-        correct="no instance found"
+        correct = "no instance found"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show BaseModel 1"))
             self.assertEqual(correct, output.getvalue().strip())
