@@ -243,7 +243,7 @@ class TestHBNBCommand_show(unittest.TestCase):
             self.assertNotEqual(correct, output.getvalue().strip())
 
     def test_show_invalid_class(self):
-        correct = "** class name missing **"
+        correct = "** class doesn't exist **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show MyModel"))
             self.assertEqual(correct, output.getvalue().strip())
