@@ -225,11 +225,11 @@ class TestHBNBCommand_show(unittest.TestCase):
     @classmethod
     def tearDown(self):
         try:
-            os,remove("file.json")
+            os, remove("file.json")
         except IOError:
             pass
         try:
-            os,rename("tmp", "file.json")
+            os, rename("tmp", "file.json")
         except IOError:
             pass
 
@@ -249,7 +249,7 @@ class TestHBNBCommand_show(unittest.TestCase):
             self.assertEqual(correct, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("MyModel.show()"))
-            self.assertNotEqual(correct, output.getvalue().strip())
+            self.assertEqual(correct, output.getvalue().strip())
 
     def test_show_missing_id_dot_notation(self):
         correct = "** instance id missing **"
