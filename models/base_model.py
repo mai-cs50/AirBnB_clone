@@ -33,7 +33,7 @@ class BaseModel:
 
     def __str__(self):
         '''returns class name, id, dictionary'''
-        return('[{}] ({}) {}'.
+        return ('[{}] ({}) {}'.
                format(self.__class__.__name__, self.id, self.__dict__))
 
     def __repr__(self):
