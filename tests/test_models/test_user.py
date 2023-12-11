@@ -39,20 +39,20 @@ class TestUser_instantiation(unittest.TestCase):
         self.assertEqual(str, type(User.last_name))
 
     def test_two_users_unique_ids(self):
+        user1 = User()
         user2 = User()
-        user3 = User()
         self.assertNotEqual(user1.id, user2.id)
 
     def test_two_users_different_created_at(self):
+        user1 = User()
+        sleep(0.05)
         user2 = User()
-        sleep(1.05)
-        user3 = User()
         self.assertLess(user1.created_at, user2.created_at)
 
     def test_two_users_different_updated_at(self):
+        user1 = User()
+        sleep(0.05)
         user2 = User()
-        sleep(1.05)
-        user3 = User()
         self.assertLess(user1.updated_at, user2.updated_at)
 
     def test_str_representation(self):
