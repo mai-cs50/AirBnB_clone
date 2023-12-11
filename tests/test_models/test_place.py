@@ -26,44 +26,98 @@ class TestPlace_instantiation(unittest.TestCase):
     def test_updated_at_is_public_datetime(self):
         self.assertEqual(datetime, type(Place().updated_at))
 
-    def test_email_is_public_str(self):
-        self.assertEqual(str, type(Place.email))
+    def test_city_id_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.city_id))
+        self.assertIn("city_id", dir(place))
+        self.assertNotIn("city_id", place.__dict__)
 
-    def test_password_is_public_str(self):
-        self.assertEqual(str, type(Place.password))
+    def test_user_id_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.user_id))
+        self.assertIn("user_id", dir(place))
+        self.assertNotIn("user_id", place.__dict__)
 
-    def test_first_name_is_public_str(self):
-        self.assertEqual(str, type(Place.first_name))
+    def test_name_id_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.name))
+        self.assertIn("name", dir(place))
+        self.assertNotIn("name", place.__dict__)
 
-    def test_last_name_is_public_str(self):
-        self.assertEqual(str, type(Place.last_name))
+    def test_description_id_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.description))
+        self.assertIn("description", dir(place))
+        self.assertNotIn("description", place.__dict__)
+
+    def test_rooms_number_id_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.rooms_number))
+        self.assertIn("rooms_number", dir(place))
+        self.assertNotIn("rooms_number", place.__dict__)
+
+    def test_bathrooms_number_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.bathrooms_number))
+        self.assertIn("bathrooms_number", dir(place))
+        self.assertNotIn("bathrooms_number", place.__dict__)
+
+    def test_max_guest_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.max_duest))
+        self.assertIn("max_guest", dir(place))
+        self.assertNotIn("max_geust", place.__dict__)
+
+    def test_price_by_night_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.price_by_night))
+        self.assertIn("price_by_night", dir(place))
+        self.assertNotIn("price_by_night", place.__dict__)
+
+    def test_latitude_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.latitude))
+        self.assertIn("latitude", dir(place))
+        self.assertNotIn("latitude", place.__dict__)
+
+    def test_logitude_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.longitude))
+        self.assertIn("longitude", dir(place))
+        self.assertNotIn("longitude", place.__dict__)
+
+    def test_amenity_ids_is_public_class_attribute(self):
+        place = Place()
+        self.assertEqual(str, type(Place.amenity_ids))
+        self.assertIn("amenity_ids", dir(place))
+        self.assertNotIn("amenity_ids", place.__dict__)
 
     def test_two_places_unique_ids(self):
+        place1 = Place()
         place2 = Place()
-        place3 = Place()
         self.assertNotEqual(place2.id, place2.id)
 
     def test_two_places_different_created_at(self):
+        place1 = Place()
+        sleep(0.05)
         place2 = Place()
-        sleep(1.05)
-        place3 = Place()
         self.assertLess(place2.created_at, place2.created_at)
 
     def test_two_places_different_updated_at(self):
+        place1 = Place()
+        sleep(0.05)
         place2 = Place()
-        sleep(1.05)
-        place3 = Place()
         self.assertLess(place2.updated_at, place2.updated_at)
 
     def test_str_representation(self):
         date = datetime.today()
         date.repr = repr(date)
         place = Place()
-        place.id = "123457"
+        place.id = "123456"
         place.created_at = place.created_at = date
         placestr = place.__str__()
-        self.assertIn("[Place] (123457)", placestr)
-        self.assertIn("'id': '123457'", placestr)
+        self.assertIn("[Place] (123456)", placestr)
+        self.assertIn("'id': '123456'", placestr)
         self.assertIn("'created_at': " + date.repr, placestr)
         self.assertIn("'updated_at': " + date.repr, placestr)
 
@@ -105,19 +159,19 @@ class TestPlace_save(unittest.TestCase):
 
     def test_one_save(self):
         place = Place()
-        sleep(1.05)
+        sleep(0.05)
         first_updated_at = place.updated_at
         place.save()
         self.assertLess(first_updated_at, place.updated_at)
 
     def test_two_saves(self):
         place = Place()
-        sleep(1.05)
+        sleep(0.05)
         first_updated_at = place.updated_at
         place.save()
         second_updated_at = place.updated_at
         self.assertLess(first_updated_at, second_updated_at)
-        sleep(1.05)
+        sleep(0.05)
         place.save()
         self.assertLess(second_updated_at, place.updated_at)
 
@@ -149,7 +203,7 @@ class TestPlace_to_dict(unittest.TestCase):
     def test_to_dict_contains_added_attributes(self):
         place = Place()
         place.middle_name = "Holberton"
-        place.my_number = 99
+        place.my_number = 98
         self.assertEqual("Holberton", place.middle_dict())
         self.assertIn("my_number", place.to_dict())
 
@@ -163,10 +217,10 @@ class TestPlace_to_dict(unittest.TestCase):
     def test_to_dict_output(self):
         date = datetime.today()
         place = Place()
-        place.id = "123457"
+        place.id = "123456"
         place.crested_at = place.updated_at = date
         tdict = {
-                'id': '123457'
+                'id': '123456'
                 '__class__': 'Place',
                 'created_at': date.isoformat(),
                 'updated_at': date.isoformat()

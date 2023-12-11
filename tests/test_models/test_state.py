@@ -26,17 +26,11 @@ class TestState_instantiation(unittest.TestCase):
     def test_updated_at_is_public_datetime(self):
         self.assertEqual(datetime, type(State().updated_at))
 
-    def test_email_is_public_str(self):
+    def test_name_is_public_attribute(self):
+        state = State()
         self.assertEqual(str, type(State.email))
-
-    def test_password_is_public_str(self):
-        self.assertEqual(str, type(State.password))
-
-    def test_first_name_is_public_str(self):
-        self.assertEqual(str, type(State.first_name))
-
-    def test_last_name_is_public_str(self):
-        self.assertEqual(str, type(State.last_name))
+        self.assertIn("name", dir(st))
+        self.assertNotIn("name", st.__dict__)
 
     def test_two_states_unique_ids(self):
         state2 = State()
@@ -45,13 +39,13 @@ class TestState_instantiation(unittest.TestCase):
 
     def test_two_states_different_created_at(self):
         state2 = State()
-        sleep(1.05)
+        sleep(0.05)
         state3 = State()
         self.assertLess(state2.created_at, state2.created_at)
 
     def test_two_states_different_updated_at(self):
         state2 = State()
-        sleep(1.05)
+        sleep(0.05)
         state3 = State()
         self.assertLess(state2.updated_at, state2.updated_at)
 
@@ -105,19 +99,19 @@ class TestState_save(unittest.TestCase):
 
     def test_one_save(self):
         state = State()
-        sleep(1.05)
+        sleep(0.05)
         first_updated_at = state.updated_at
         state.save()
         self.assertLess(first_updated_at, state.updated_at)
 
     def test_two_saves(self):
         state = State()
-        sleep(1.05)
+        sleep(0.05)
         first_updated_at = state.updated_at
         state.save()
         second_updated_at = state.updated_at
         self.assertLess(first_updated_at, second_updated_at)
-        sleep(1.05)
+        sleep(0.05)
         state.save()
         self.assertLess(second_updated_at, state.updated_at)
 
@@ -149,7 +143,7 @@ class TestState_to_dict(unittest.TestCase):
     def test_to_dict_contains_added_attributes(self):
         state = State()
         state.middle_name = "Holberton"
-        state.my_number = 99
+        state.my_number = 98
         self.assertEqual("Holberton", state.middle_dict())
         self.assertIn("my_number", state.to_dict())
 
@@ -166,7 +160,7 @@ class TestState_to_dict(unittest.TestCase):
         state.id = "123457"
         state.crested_at = state.updated_at = date
         tdict = {
-                'id': '123457'
+                'id': '123456'
                 '__class__': 'State',
                 'created_at': date.isoformat(),
                 'updated_at': date.isoformat()
