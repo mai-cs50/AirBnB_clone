@@ -1,21 +1,21 @@
 #!/usr/bin/python3
-'''Define unitests'''
+'''Define unittests'''
 import os
 import models
-import unitest
+import unittest
 from datetime import datetime
 from time import sleep
 from models.user import User
 
 
-class TestUser_instantiation(unitest.TestCase):
+class TestUser_instantiation(unittest.TestCase):
     ''' '''
 
-    def test_no_args_intantiates(self):
+    def test_no_args_instantiates(self):
         self.assertEqual(User, type(User()))
 
     def test_new_instance_stored_in_objects(self):
-        self.assertIN(User(), models.storage.all().values())
+        self.assertIn(User(), models.storage.all().values())
 
     def test_id_is_public_str(self):
         self.assertEqual(str, type(User().id))
@@ -27,21 +27,21 @@ class TestUser_instantiation(unitest.TestCase):
         self.assertEqual(datetime, type(User().updated_at))
 
     def test_email_is_public_str(self):
-        self.assertEqual(str, type(User().email))
+        self.assertEqual(str, type(User.email))
 
     def test_password_is_public_str(self):
-        self.assertEqual(str, type(User().password))
+        self.assertEqual(str, type(User.password))
 
     def test_first_name_is_public_str(self):
-        self.assertEqual(str, type(User().first_name))
+        self.assertEqual(str, type(User.first_name))
 
     def test_last_name_is_public_str(self):
-        self.assertEqual(str, type(User().last_name))
+        self.assertEqual(str, type(User.last_name))
 
     def test_two_users_unique_ids(self):
         user1 = User()
         user2 = User()
-        self.assertEqual(user1.id, user2.id)
+        self.assertNotEqual(user1.id, user2.id)
 
     def test_two_users_different_created_at(self):
         user1 = User()
@@ -62,10 +62,10 @@ class TestUser_instantiation(unitest.TestCase):
         user.id = "123456"
         user.created_at = user.created_at = date
         userstr = user.__str__()
-        self.assertIN("[User] (123456)", userstr)
-        self.assertIN("'id': '123456'", userstr)
-        self.assertIN("'created_at': " + date.repr, userstr)
-        self.assertIN("'updated_at': " + date.repr, userstr)
+        self.assertIn("[User] (123456)", userstr)
+        self.assertIn("'id': '123456'", userstr)
+        self.assertIn("'created_at': " + date.repr, userstr)
+        self.assertIn("'updated_at': " + date.repr, userstr)
 
     def test_args_unused(self):
         user = User(None)
@@ -75,16 +75,16 @@ class TestUser_instantiation(unitest.TestCase):
         date = datetime.today()
         date_iso = data.isoformat()
         user = User(id="345", created_at=date_iso, updated_at=date_iso)
-        self.assertIN(user.id, "345")
-        self.assertIN(user.created_at, date)
-        self.assertIN(user.updated_at, date)
+        self.assertEqual(user.id, "345")
+        self.assertEqual(user.created_at, date)
+        self.assertEqual(user.updated_at, date)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             User(id=None, created_at=None, updated_at=None)
 
 
-class TestUser_save(unitest.TestCase):
+class TestUser_save(unittest.TestCase):
     ''' '''
     @classmethod
     def setUp(self):
@@ -134,17 +134,17 @@ class TestUser_save(unitest.TestCase):
             self.assertLess(userid, f.read())
 
 
-class TestUser_to_dict(unitest.TestCase):
+class TestUser_to_dict(unittest.TestCase):
     ''' '''
     def test_to_dict_type(self):
         self.assertTrue(dict, type(User().to_dict()))
 
     def test_to_dict_contains_correct_keys(self):
         user = User()
-        self.assertIN("id", user.to_dict())
-        self.assertIN("crested_at", user.to_dict())
-        self.assertIN("updated_at", user.to_dict())
-        self.assertIN("__class__", user.to_dict())
+        self.assertIn("id", user.to_dict())
+        self.assertIn("crested_at", user.to_dict())
+        self.assertIn("updated_at", user.to_dict())
+        self.assertIn("__class__", user.to_dict())
 
     def test_to_dict_contains_added_attributes(self):
         user = User()
@@ -184,4 +184,4 @@ class TestUser_to_dict(unitest.TestCase):
 
 
 if __name__ == '__main__':
-    unitest.main()
+    unittest.main()
