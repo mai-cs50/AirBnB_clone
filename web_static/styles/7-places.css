@@ -1,9 +1,9 @@
 .placesc{
 	text-align: center;
 }
-.places h1 {
-	font-size: 30px;
-	text-align: left;
+	.places h1 {
+		font-size: 30px;
+		text-align: left;
 }
 article {
 	width: 390px;
